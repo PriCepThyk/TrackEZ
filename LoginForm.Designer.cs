@@ -40,7 +40,7 @@
             // 
             btnLog.AutoSize = true;
             btnLog.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLog.Location = new Point(144, 309);
+            btnLog.Location = new Point(138, 305);
             btnLog.Name = "btnLog";
             btnLog.Size = new Size(113, 43);
             btnLog.TabIndex = 1;
@@ -53,7 +53,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.FromArgb(0, 0, 0, 128);
             label1.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(93, 138);
+            label1.Location = new Point(152, 81);
             label1.Name = "label1";
             label1.Size = new Size(84, 28);
             label1.TabIndex = 3;
@@ -62,7 +62,7 @@
             // txtLogin
             // 
             txtLogin.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtLogin.Location = new Point(63, 178);
+            txtLogin.Location = new Point(122, 128);
             txtLogin.Name = "txtLogin";
             txtLogin.Size = new Size(144, 35);
             txtLogin.TabIndex = 4;
@@ -71,7 +71,7 @@
             // txtPsw
             // 
             txtPsw.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtPsw.Location = new Point(217, 225);
+            txtPsw.Location = new Point(122, 229);
             txtPsw.Name = "txtPsw";
             txtPsw.Size = new Size(144, 35);
             txtPsw.TabIndex = 5;
@@ -82,7 +82,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.FromArgb(0, 0, 0, 128);
             label2.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(240, 185);
+            label2.Location = new Point(140, 182);
             label2.Name = "label2";
             label2.Size = new Size(109, 28);
             label2.TabIndex = 6;
@@ -92,7 +92,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(396, 398);
             Controls.Add(label2);

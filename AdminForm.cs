@@ -34,10 +34,20 @@ namespace TrackEZ
             bindingSource = new BindingSource();
             dataSet = new DataSet();
 
-            selectTable = 1;
-
-            if (isOvner) menuStrip1.Visible = true;
-            else menuStrip1.Visible = false;
+            if (isOvner)
+            {
+                menuStrip1.Visible = true;
+                selectTable = 1;
+            }
+            else
+            {
+                menuStrip1.Visible = false;
+                selectTableF();
+                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+                tableLayoutPanel1.Controls.Add(dataGridView2, 0, 1);
+                dataGridView2.Visible = true;
+                selectTable = 3;
+            }
 
 
         }
@@ -113,7 +123,6 @@ namespace TrackEZ
                     break;
                 case 3:
                     getDbData();
-                    dataGridView1.Columns[0].HeaderText = "ID";
                     dataGridView1.Columns[1].HeaderText = "ID";
                     dataGridView1.Columns[2].HeaderText = "В Ім`я";
                     dataGridView1.Columns[3].HeaderText = "В Прізвище";
@@ -123,13 +132,36 @@ namespace TrackEZ
                     dataGridView1.Columns[7].HeaderText = "О Прізвище";
                     dataGridView1.Columns[8].HeaderText = "О По батькові";
                     dataGridView1.Columns[9].HeaderText = "О Номер тел";
-                    dataGridView1.Columns[10].HeaderText = "Час відправлення";
-                    dataGridView1.Columns[11].HeaderText = "Час прибуття";
-                    dataGridView1.Columns[12].HeaderText = "Вага";
-                    dataGridView1.Columns[13].HeaderText = "Статус";
-                    dataGridView1.Columns[14].HeaderText = "Тип посилки";
-                    dataGridView1.Columns[15].HeaderText = "Вартість";
-                    dataGridView1.Columns[16].HeaderText = "Статус оплати";
+
+                    dataGridView2.Rows.Clear();
+                    dataGridView2.Columns.Clear();
+
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
+                        dataGridView2.Columns.Add(column.Clone() as DataGridViewColumn);
+                    }
+
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            object[] rowData = new object[row.Cells.Count];
+                            for (int i = 0; i < row.Cells.Count; i++)
+                            {
+                                rowData[i] = row.Cells[i].Value;
+                            }
+                            dataGridView2.Rows.Add(rowData);
+                        }
+                    }
+                    dataGridView2.Columns[1].HeaderText = "ID";
+                    dataGridView2.Columns[10].HeaderText = "Час відправлення";
+                    dataGridView2.Columns[11].HeaderText = "Час прибуття";
+                    dataGridView2.Columns[12].HeaderText = "Вага";
+                    dataGridView2.Columns[13].HeaderText = "Статус";
+                    dataGridView2.Columns[14].HeaderText = "Тип посилки";
+                    dataGridView2.Columns[15].HeaderText = "Вартість";
+                    dataGridView2.Columns[16].HeaderText = "Статус оплати";
+
                     dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[10].Visible = false;
                     dataGridView1.Columns[11].Visible = false;
@@ -138,6 +170,18 @@ namespace TrackEZ
                     dataGridView1.Columns[14].Visible = false;
                     dataGridView1.Columns[15].Visible = false;
                     dataGridView1.Columns[16].Visible = false;
+
+                    dataGridView2.Columns[0].Visible = false;
+                    dataGridView2.Columns[2].Visible = false;
+                    dataGridView2.Columns[3].Visible = false;
+                    dataGridView2.Columns[4].Visible = false;
+                    dataGridView2.Columns[5].Visible = false;
+                    dataGridView2.Columns[6].Visible = false;
+                    dataGridView2.Columns[7].Visible = false;
+                    dataGridView2.Columns[8].Visible = false;
+                    dataGridView2.Columns[9].Visible = false;
+                    dataGridView2.Columns[10].Visible = false;
+
                     rowCount = dataGridView1.RowCount;
                     break;
                 default:
@@ -301,13 +345,19 @@ namespace TrackEZ
 
         private void akkToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (selectTable == 3)
+                tableLayoutPanel1.RowStyles.RemoveAt(1);
+            dataGridView2.Visible = false;
             selectTable = 1;
             selectTableF();
         }
 
         private void departToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (selectTable == 3)
+                tableLayoutPanel1.RowStyles.RemoveAt(1);
             selectTable = 2;
+            dataGridView2.Visible = false;
             selectTableF();
         }
 
@@ -315,6 +365,22 @@ namespace TrackEZ
         {
             selectTable = 3;
             selectTableF();
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(dataGridView2, 0, 1);
+            dataGridView2.Visible = true;
+        }
+
+        private void AdminForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (MessageBox.Show("Ви впевнені, що хочете вийти?", "Підтвердження", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.Hide();
+                    LoginForm loginForm = new LoginForm();
+                    loginForm.Show();
+                }
+            }
         }
     }
 }
