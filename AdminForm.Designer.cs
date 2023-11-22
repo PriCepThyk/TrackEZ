@@ -38,8 +38,9 @@
             comBox = new ComboBox();
             txtSh = new TextBox();
             dataGridView2 = new DataGridView();
-            button1 = new Button();
+            btnSh = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
+            btnInf = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -94,7 +95,7 @@
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridView1.Size = new Size(869, 228);
+            dataGridView1.Size = new Size(869, 442);
             dataGridView1.TabIndex = 8;
             dataGridView1.CellBeginEdit += dataGridView1_CellBeginEdit;
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
@@ -152,17 +153,17 @@
             dataGridView2.Size = new Size(869, 228);
             dataGridView2.TabIndex = 11;
             // 
-            // button1
+            // btnSh
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.AutoSize = true;
-            button1.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(893, 114);
-            button1.Name = "button1";
-            button1.Size = new Size(175, 43);
-            button1.TabIndex = 12;
-            button1.Text = "Назад";
-            button1.UseVisualStyleBackColor = true;
+            btnSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSh.AutoSize = true;
+            btnSh.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSh.Location = new Point(893, 114);
+            btnSh.Name = "btnSh";
+            btnSh.Size = new Size(175, 43);
+            btnSh.TabIndex = 12;
+            btnSh.Text = "Пошук";
+            btnSh.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -170,14 +171,25 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(dataGridView1, 0, 0);
-            tableLayoutPanel1.Controls.Add(dataGridView2, 0, 1);
             tableLayoutPanel1.Location = new Point(12, 31);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(875, 468);
             tableLayoutPanel1.TabIndex = 13;
+            // 
+            // btnInf
+            // 
+            btnInf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnInf.AutoSize = true;
+            btnInf.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInf.Location = new Point(893, 407);
+            btnInf.Name = "btnInf";
+            btnInf.Size = new Size(175, 43);
+            btnInf.TabIndex = 14;
+            btnInf.Text = "Inf";
+            btnInf.UseVisualStyleBackColor = true;
             // 
             // AdminForm
             // 
@@ -185,20 +197,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1080, 504);
+            Controls.Add(btnInf);
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(button1);
+            Controls.Add(btnSh);
             Controls.Add(txtSh);
             Controls.Add(comBox);
             Controls.Add(btnBack);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             MainMenuStrip = menuStrip1;
             Name = "AdminForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TrackEZ";
             FormClosing += AdminForm_FormClosing;
             Load += AdminForm_Load;
+            KeyDown += AdminForm_KeyDown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -219,7 +234,8 @@
         private ComboBox comBox;
         private TextBox txtSh;
         private DataGridView dataGridView2;
-        private Button button1;
+        private Button btnSh;
         private TableLayoutPanel tableLayoutPanel1;
+        private Button btnInf;
     }
 }
