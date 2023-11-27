@@ -62,5 +62,18 @@ namespace TrackEZ
                 }
             }
         }
+
+        private void LoginForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (MessageBox.Show("Ви впевнені, що хочете вийти?", "Підтвердження", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.Hide();
+                    LoginForm loginForm = new LoginForm();
+                    loginForm.Show();
+                }
+            }
+        }
     }
 }

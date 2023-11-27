@@ -102,11 +102,13 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             MaximizeBox = false;
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TrackEZ";
             FormClosing += Form1_FormClosing;
+            KeyDown += LoginForm_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }

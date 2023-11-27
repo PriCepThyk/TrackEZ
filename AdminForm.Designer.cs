@@ -37,14 +37,10 @@
             btnBack = new Button();
             comBox = new ComboBox();
             txtSh = new TextBox();
-            dataGridView2 = new DataGridView();
             btnSh = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
             btnInf = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -88,14 +84,14 @@
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(3, 3);
+            dataGridView1.Location = new Point(12, 31);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridView1.Size = new Size(869, 442);
+            dataGridView1.Size = new Size(875, 461);
             dataGridView1.TabIndex = 8;
             dataGridView1.CellBeginEdit += dataGridView1_CellBeginEdit;
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
@@ -106,7 +102,7 @@
             btnBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnBack.AutoSize = true;
             btnBack.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnBack.Location = new Point(893, 456);
+            btnBack.Location = new Point(893, 449);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(175, 43);
             btnBack.TabIndex = 5;
@@ -133,62 +129,28 @@
             txtSh.Size = new Size(175, 35);
             txtSh.TabIndex = 10;
             // 
-            // dataGridView2
-            // 
-            dataGridView2.AllowUserToResizeColumns = false;
-            dataGridView2.AllowUserToResizeRows = false;
-            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView2.BackgroundColor = SystemColors.Menu;
-            dataGridView2.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView2.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(3, 237);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridView2.RowHeadersVisible = false;
-            dataGridView2.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridView2.Size = new Size(869, 228);
-            dataGridView2.TabIndex = 11;
-            // 
             // btnSh
             // 
             btnSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSh.AutoSize = true;
             btnSh.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSh.Location = new Point(893, 114);
+            btnSh.Location = new Point(900, 123);
             btnSh.Name = "btnSh";
-            btnSh.Size = new Size(175, 43);
+            btnSh.Size = new Size(160, 38);
             btnSh.TabIndex = 12;
             btnSh.Text = "Пошук";
             btnSh.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(dataGridView1, 0, 0);
-            tableLayoutPanel1.Location = new Point(12, 31);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(875, 468);
-            tableLayoutPanel1.TabIndex = 13;
             // 
             // btnInf
             // 
             btnInf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnInf.AutoSize = true;
             btnInf.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnInf.Location = new Point(893, 407);
+            btnInf.Location = new Point(900, 405);
             btnInf.Name = "btnInf";
-            btnInf.Size = new Size(175, 43);
+            btnInf.Size = new Size(160, 38);
             btnInf.TabIndex = 14;
-            btnInf.Text = "Inf";
+            btnInf.Text = "Деталі";
             btnInf.UseVisualStyleBackColor = true;
             // 
             // AdminForm
@@ -197,8 +159,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1080, 504);
+            Controls.Add(dataGridView1);
             Controls.Add(btnInf);
-            Controls.Add(tableLayoutPanel1);
             Controls.Add(btnSh);
             Controls.Add(txtSh);
             Controls.Add(comBox);
@@ -217,8 +179,6 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,9 +193,7 @@
         private Button btnBack;
         private ComboBox comBox;
         private TextBox txtSh;
-        private DataGridView dataGridView2;
         private Button btnSh;
-        private TableLayoutPanel tableLayoutPanel1;
         private Button btnInf;
     }
 }

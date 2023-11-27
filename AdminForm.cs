@@ -22,10 +22,11 @@ namespace TrackEZ
         private DataSet dataSet;
         private int selectTable;
         private int rowCount;
+        private bool isOvner;
 
         private Dictionary<DataGridViewCell, object> originalValues = new Dictionary<DataGridViewCell, object>();
 
-        public AdminForm(bool isOvner)
+        public AdminForm(bool isOvnerP)
         {
             InitializeComponent();
             dB = new DB();
@@ -33,7 +34,7 @@ namespace TrackEZ
             dataTable = new DataTable();
             bindingSource = new BindingSource();
             dataSet = new DataSet();
-
+            isOvner = isOvnerP;
             if (isOvner)
             {
                 menuStrip1.Visible = true;
@@ -43,9 +44,6 @@ namespace TrackEZ
             {
                 menuStrip1.Visible = false;
                 selectTableF();
-                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-                tableLayoutPanel1.Controls.Add(dataGridView2, 0, 1);
-                dataGridView2.Visible = true;
                 selectTable = 3;
             }
 
@@ -66,7 +64,7 @@ namespace TrackEZ
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             selectTableF();
         }
 
@@ -76,8 +74,7 @@ namespace TrackEZ
             {
                 case 1:
                     adapter = new MySqlDataAdapter("SELECT * FROM `trackez`.`admin_accounts`", dB.getConnection());
-                    if (dataSet != null && dataSet.Tables.Contains("admin_accounts"))
-                    {
+                    if (dataSet != null && dataSet.Tables.Contains("admin_accounts")) {
                         dataSet.Tables["admin_accounts"].Clear();
                     }
                     adapter.Fill(dataSet, "admin_accounts");
@@ -88,9 +85,8 @@ namespace TrackEZ
 
                     break;
                 case 3:
-                    adapter = new MySqlDataAdapter("SELECT * FROM `trackez`.`parcels`", dB.getConnection());
-                    if (dataSet != null && dataSet.Tables.Contains("parcels"))
-                    {
+                    adapter = new MySqlDataAdapter("SELECT `ID`, `parcel_number`, CONCAT(`sender_last_name`, ' ', `sender_first_name`, ' ', `sender_middle_name`) AS `sender_full_name`, `sender_phone_number`, CONCAT(`recipient_last_name`, ' ', `recipient_first_name`, ' ', `recipient_middle_name`) AS `recipient_full_name`, `status`, `payment_status`, `cost` FROM `trackez`.`parcels`", dB.getConnection());
+                    if (dataSet != null && dataSet.Tables.Contains("parcels")) {
                         dataSet.Tables["parcels"].Clear();
                     }
                     adapter.Fill(dataSet, "parcels");
@@ -114,6 +110,7 @@ namespace TrackEZ
                     dataGridView1.Columns[3].HeaderText = "Ім'я";
                     dataGridView1.Columns[4].HeaderText = "Прізвище";
                     dataGridView1.Columns[5].HeaderText = "Адмін";
+                    
                     dataGridView1.Columns[0].Visible = false;
                     rowCount = dataGridView1.RowCount;
                     break;
@@ -124,64 +121,14 @@ namespace TrackEZ
                 case 3:
                     getDbData();
                     dataGridView1.Columns[1].HeaderText = "ID";
-                    dataGridView1.Columns[2].HeaderText = "В Ім`я";
-                    dataGridView1.Columns[3].HeaderText = "В Прізвище";
-                    dataGridView1.Columns[4].HeaderText = "В По батькові";
-                    dataGridView1.Columns[5].HeaderText = "В Номер тел";
-                    dataGridView1.Columns[6].HeaderText = "О Ім`я";
-                    dataGridView1.Columns[7].HeaderText = "О Прізвище";
-                    dataGridView1.Columns[8].HeaderText = "О По батькові";
-                    dataGridView1.Columns[9].HeaderText = "О Номер тел";
-
-                    dataGridView2.Rows.Clear();
-                    dataGridView2.Columns.Clear();
-
-                    foreach (DataGridViewColumn column in dataGridView1.Columns)
-                    {
-                        dataGridView2.Columns.Add(column.Clone() as DataGridViewColumn);
-                    }
-
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        if (!row.IsNewRow)
-                        {
-                            object[] rowData = new object[row.Cells.Count];
-                            for (int i = 0; i < row.Cells.Count; i++)
-                            {
-                                rowData[i] = row.Cells[i].Value;
-                            }
-                            dataGridView2.Rows.Add(rowData);
-                        }
-                    }
-                    dataGridView2.Columns[1].HeaderText = "ID";
-                    dataGridView2.Columns[10].HeaderText = "Час відправлення";
-                    dataGridView2.Columns[11].HeaderText = "Час прибуття";
-                    dataGridView2.Columns[12].HeaderText = "Вага";
-                    dataGridView2.Columns[13].HeaderText = "Статус";
-                    dataGridView2.Columns[14].HeaderText = "Тип посилки";
-                    dataGridView2.Columns[15].HeaderText = "Вартість";
-                    dataGridView2.Columns[16].HeaderText = "Статус оплати";
+                    dataGridView1.Columns[2].HeaderText = "ПІБ Відправника";
+                    dataGridView1.Columns[3].HeaderText = "Номер телефону";
+                    dataGridView1.Columns[4].HeaderText = "ПІБ Отримувача";
+                    dataGridView1.Columns[5].HeaderText = "Статус";
+                    dataGridView1.Columns[6].HeaderText = "Стаус оплати";
+                    dataGridView1.Columns[7].HeaderText = "Вартість";
 
                     dataGridView1.Columns[0].Visible = false;
-                    dataGridView1.Columns[10].Visible = false;
-                    dataGridView1.Columns[11].Visible = false;
-                    dataGridView1.Columns[12].Visible = false;
-                    dataGridView1.Columns[13].Visible = false;
-                    dataGridView1.Columns[14].Visible = false;
-                    dataGridView1.Columns[15].Visible = false;
-                    dataGridView1.Columns[16].Visible = false;
-
-                    dataGridView2.Columns[0].Visible = false;
-                    dataGridView2.Columns[2].Visible = false;
-                    dataGridView2.Columns[3].Visible = false;
-                    dataGridView2.Columns[4].Visible = false;
-                    dataGridView2.Columns[5].Visible = false;
-                    dataGridView2.Columns[6].Visible = false;
-                    dataGridView2.Columns[7].Visible = false;
-                    dataGridView2.Columns[8].Visible = false;
-                    dataGridView2.Columns[9].Visible = false;
-                    dataGridView2.Columns[10].Visible = false;
-
                     rowCount = dataGridView1.RowCount;
                     break;
                 default:
@@ -191,83 +138,82 @@ namespace TrackEZ
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
-            String newLogon;
-            String newPassword;
-            String newName;
-            String newSName;
-            bool newIsOvner;
-            int id;
-
             DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-            if (string.IsNullOrEmpty(cell.Value?.ToString()))
-            {
-                if (originalValues.ContainsKey(cell))
-                {
+            if (string.IsNullOrEmpty(cell.Value?.ToString())) {
+                if (originalValues.ContainsKey(cell)) {
                     cell.Value = originalValues[cell];
                 }
             }
-            else
-            {
+            else {
                 originalValues[cell] = cell.Value;
             }
 
-            if (e.RowIndex >= 0 && rowCount == dataGridView1.RowCount)
+            if (selectTable == 3)
             {
-                id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-                if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
-                    newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() != "")
-                    newPassword = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() != "")
-                    newName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString() != "")
-                    newSName = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString() != "")
-                    newIsOvner = (bool)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
-                else
-                    return;
+                String newLogon;
+                String newPassword;
+                String newName;
+                String newSName;
+                bool newIsOvner;
+                int id;
 
-                updateDataInDatabase(id, newLogon, newPassword, newName, newSName, newIsOvner);
-            }
-            else if (rowCount < dataGridView1.RowCount)
-            {
-                if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
-                    newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() != "")
-                    newPassword = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() != "")
-                    newName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                else
-                    return;
-                if (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString() != "")
-                    newSName = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                else
-                    return;
-                DataGridViewCell cellIsOvn = dataGridView1.Rows[e.RowIndex].Cells["isOwner"];
-                if (cellIsOvn is DataGridViewCheckBoxCell)
+                if (e.RowIndex >= 0 && rowCount == dataGridView1.RowCount)
                 {
-                    if (cellIsOvn.Value != DBNull.Value)
-                        newIsOvner = (bool)cellIsOvn.Value;
-                    else newIsOvner = false;
+                    id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+                    if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
+                        newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() != "")
+                        newPassword = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() != "")
+                        newName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString() != "")
+                        newSName = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString() != "")
+                        newIsOvner = (bool)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
+                    else
+                        return;
+
+                    updateDataInDatabase(id, newLogon, newPassword, newName, newSName, newIsOvner);
                 }
-                else
-                    return;
-                dataGridView1.Rows[e.RowIndex].Cells[0].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex - 1].Cells[0].Value) + 1;
-                rowCount = dataGridView1.RowCount;
-                addDataInDatabase(newLogon, newPassword, newName, newSName, newIsOvner);
+                else if (rowCount < dataGridView1.RowCount)
+                {
+                    if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
+                        newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() != "")
+                        newPassword = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() != "")
+                        newName = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    else
+                        return;
+                    if (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString() != "")
+                        newSName = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    else
+                        return;
+                    DataGridViewCell cellIsOvn = dataGridView1.Rows[e.RowIndex].Cells["isOwner"];
+                    if (cellIsOvn is DataGridViewCheckBoxCell)
+                    {
+                        if (cellIsOvn.Value != DBNull.Value)
+                            newIsOvner = (bool)cellIsOvn.Value;
+                        else newIsOvner = false;
+                    }
+                    else
+                        return;
+                    dataGridView1.Rows[e.RowIndex].Cells[0].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex - 1].Cells[0].Value) + 1;
+                    rowCount = dataGridView1.RowCount;
+                    addDataInDatabase(newLogon, newPassword, newName, newSName, newIsOvner);
+                }
             }
         }
         private void updateDataInDatabase(int id, String newLogon, String newPassword, String newName, String newSName, bool newIsOvner)
@@ -345,29 +291,24 @@ namespace TrackEZ
 
         private void akkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (selectTable == 3)
-                tableLayoutPanel1.RowStyles.RemoveAt(1);
-            dataGridView2.Visible = false;
             selectTable = 1;
             selectTableF();
         }
 
         private void departToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (selectTable == 3)
-                tableLayoutPanel1.RowStyles.RemoveAt(1);
             selectTable = 2;
-            dataGridView2.Visible = false;
             selectTableF();
         }
 
         private void parselToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selectTable = 3;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToDeleteRows = false;
+
             selectTableF();
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(dataGridView2, 0, 1);
-            dataGridView2.Visible = true;
         }
 
         private void AdminForm_KeyDown(object sender, KeyEventArgs e)
