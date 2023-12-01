@@ -10,7 +10,9 @@ namespace TrackEZ
 {
     internal class DB
     {
-        MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=usbw;database=trackez;");
+        String connectStr = "server=localhost;port=3306;username=root;password=usbw;database=trackez;Charset=utf8;";
+
+        MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=usbw;database=trackez;Charset=utf8;");
 
         public void openConnection()
         {
@@ -40,6 +42,11 @@ namespace TrackEZ
         public MySqlConnection getConnection()
         {
             return connection;
+        }
+
+        public String getConnStr()
+        {
+            return connectStr;
         }
     }
 }

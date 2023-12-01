@@ -48,7 +48,11 @@ namespace TrackEZ
                     }
                     if (dataTable.Rows.Count > 0)
                     {
-                        AdminForm adminF = new AdminForm(isOwner);
+                        AdminForm adminF;
+                        if (isOwner)
+                           adminF = new AdminForm(isOwner, 1);
+                        else
+                           adminF = new AdminForm(isOwner, 3);
                         this.Hide();
                         adminF.Show();
                     }
@@ -59,6 +63,17 @@ namespace TrackEZ
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Помилка входу: " + ex.Message);
+                }
+            }
+        }
+
+        private void LoginForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (MessageBox.Show("Ви впевнені, що хочете вийти?", "Підтвердження", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Application.ExitThread();
                 }
             }
         }
