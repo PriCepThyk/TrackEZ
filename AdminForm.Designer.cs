@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             menuStrip1 = new MenuStrip();
             akkToolStripMenuItem = new ToolStripMenuItem();
@@ -35,10 +36,11 @@
             parselToolStripMenuItem = new ToolStripMenuItem();
             dataGridView1 = new DataGridView();
             btnBack = new Button();
-            comBox = new ComboBox();
+            comBoxSh = new ComboBox();
             txtSh = new TextBox();
             btnSh = new Button();
             btnInf = new Button();
+            btnAdd = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -49,7 +51,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { akkToolStripMenuItem, departToolStripMenuItem, parselToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1080, 28);
+            menuStrip1.Size = new Size(1253, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -83,6 +85,14 @@
             dataGridView1.BackgroundColor = SystemColors.Menu;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 31);
             dataGridView1.Name = "dataGridView1";
@@ -91,7 +101,7 @@
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridView1.Size = new Size(875, 461);
+            dataGridView1.Size = new Size(1030, 461);
             dataGridView1.TabIndex = 8;
             dataGridView1.CellBeginEdit += dataGridView1_CellBeginEdit;
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
@@ -102,7 +112,7 @@
             btnBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnBack.AutoSize = true;
             btnBack.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnBack.Location = new Point(893, 449);
+            btnBack.Location = new Point(1057, 449);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(175, 43);
             btnBack.TabIndex = 5;
@@ -110,23 +120,24 @@
             btnBack.UseVisualStyleBackColor = true;
             btnBack.Click += btnBack_Click;
             // 
-            // comBox
+            // comBoxSh
             // 
-            comBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            comBox.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            comBox.FormattingEnabled = true;
-            comBox.Location = new Point(893, 31);
-            comBox.Name = "comBox";
-            comBox.Size = new Size(175, 36);
-            comBox.TabIndex = 9;
+            comBoxSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comBoxSh.DropDownStyle = ComboBoxStyle.DropDownList;
+            comBoxSh.Font = new Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxSh.FormattingEnabled = true;
+            comBoxSh.Location = new Point(1048, 31);
+            comBoxSh.Name = "comBoxSh";
+            comBoxSh.Size = new Size(193, 30);
+            comBoxSh.TabIndex = 9;
             // 
             // txtSh
             // 
             txtSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSh.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtSh.Location = new Point(893, 73);
+            txtSh.Font = new Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSh.Location = new Point(1048, 73);
             txtSh.Name = "txtSh";
-            txtSh.Size = new Size(175, 35);
+            txtSh.Size = new Size(193, 29);
             txtSh.TabIndex = 10;
             // 
             // btnSh
@@ -134,36 +145,52 @@
             btnSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSh.AutoSize = true;
             btnSh.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSh.Location = new Point(900, 123);
+            btnSh.Location = new Point(1064, 123);
             btnSh.Name = "btnSh";
             btnSh.Size = new Size(160, 38);
             btnSh.TabIndex = 12;
             btnSh.Text = "Пошук";
             btnSh.UseVisualStyleBackColor = true;
+            btnSh.Click += btnSh_Click;
             // 
             // btnInf
             // 
             btnInf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnInf.AutoSize = true;
             btnInf.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnInf.Location = new Point(900, 405);
+            btnInf.Location = new Point(1064, 405);
             btnInf.Name = "btnInf";
             btnInf.Size = new Size(160, 38);
             btnInf.TabIndex = 14;
             btnInf.Text = "Деталі";
             btnInf.UseVisualStyleBackColor = true;
+            btnInf.Click += btnInf_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAdd.AutoSize = true;
+            btnAdd.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAdd.Location = new Point(1081, 361);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(127, 38);
+            btnAdd.TabIndex = 15;
+            btnAdd.Text = "Додати";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(1080, 504);
+            ClientSize = new Size(1253, 504);
+            Controls.Add(btnAdd);
             Controls.Add(dataGridView1);
             Controls.Add(btnInf);
             Controls.Add(btnSh);
             Controls.Add(txtSh);
-            Controls.Add(comBox);
+            Controls.Add(comBoxSh);
             Controls.Add(btnBack);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -191,9 +218,10 @@
         private DataGridView dataGridView1;
         private ToolStripMenuItem departToolStripMenuItem;
         private Button btnBack;
-        private ComboBox comBox;
+        private ComboBox comBoxSh;
         private TextBox txtSh;
         private Button btnSh;
         private Button btnInf;
+        private Button btnAdd;
     }
 }
