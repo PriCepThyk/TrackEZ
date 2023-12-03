@@ -247,7 +247,7 @@ namespace TrackEZ
 
                 }
                 else
-                    MessageBox.Show("Закінчіть пошук та виберіт поле для пошукку");
+                    MessageBox.Show("Закінчіть пошук для редагування даних");
             }
             else if (selectTable == 2)
             {
