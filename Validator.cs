@@ -12,7 +12,7 @@ namespace TrackEZ
         public static bool ValidateTextBox(TextBox textBox, int key)
         {
             string lettersPattern = @"^[a-zA-Zа-яА-ЯіІїЇґҐ]+$";
-            string numbersPattern = @"^-?\d+([.,]\d+)?$";
+            string numbersPattern = @"^-?\d+([,]\d+)?$";
 
             string inputText = textBox.Text.Trim();
 

@@ -256,6 +256,9 @@ namespace TrackEZ
             insertCommand.ExecuteNonQuery();
             dB.closeConnection();
             MessageBox.Show("Запис додано");
+            this.Hide();
+            AdminForm adminForm = new AdminForm(isOvner, selectTable);
+            adminForm.Show();
         }
 
         private void btnUpd_Click(object sender, EventArgs e)
