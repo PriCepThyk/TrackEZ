@@ -24,7 +24,7 @@ namespace TrackEZ
         private void btnLog_Click(object sender, EventArgs e)
         {
             String adminLogin = txtLogin.Text;
-            String adminPassword = txtLogin.Text;
+            String adminPassword = txtPsw.Text;
 
             if (adminLogin == "" || adminPassword == "")
                 MessageBox.Show("Введіть дані", "Помилка", MessageBoxButtons.OK);
@@ -50,9 +50,9 @@ namespace TrackEZ
                     {
                         AdminForm adminF;
                         if (isOwner)
-                           adminF = new AdminForm(isOwner, 1);
+                            adminF = new AdminForm(isOwner, 1);
                         else
-                           adminF = new AdminForm(isOwner, 3);
+                            adminF = new AdminForm(isOwner, 3);
                         this.Hide();
                         adminF.Show();
                     }

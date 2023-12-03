@@ -111,10 +111,10 @@
             // 
             btnBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnBack.AutoSize = true;
-            btnBack.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnBack.Location = new Point(1057, 449);
+            btnBack.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBack.Location = new Point(1064, 457);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(175, 43);
+            btnBack.Size = new Size(160, 35);
             btnBack.TabIndex = 5;
             btnBack.Text = "Назад";
             btnBack.UseVisualStyleBackColor = true;
@@ -124,27 +124,27 @@
             // 
             comBoxSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxSh.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxSh.Font = new Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxSh.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxSh.FormattingEnabled = true;
             comBoxSh.Location = new Point(1048, 31);
             comBoxSh.Name = "comBoxSh";
-            comBoxSh.Size = new Size(193, 30);
+            comBoxSh.Size = new Size(193, 33);
             comBoxSh.TabIndex = 9;
             // 
             // txtSh
             // 
             txtSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSh.Font = new Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSh.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtSh.Location = new Point(1048, 73);
             txtSh.Name = "txtSh";
-            txtSh.Size = new Size(193, 29);
+            txtSh.Size = new Size(193, 32);
             txtSh.TabIndex = 10;
             // 
             // btnSh
             // 
             btnSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSh.AutoSize = true;
-            btnSh.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSh.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnSh.Location = new Point(1064, 123);
             btnSh.Name = "btnSh";
             btnSh.Size = new Size(160, 38);
@@ -157,10 +157,10 @@
             // 
             btnInf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnInf.AutoSize = true;
-            btnInf.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnInf.Location = new Point(1064, 405);
+            btnInf.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInf.Location = new Point(1073, 409);
             btnInf.Name = "btnInf";
-            btnInf.Size = new Size(160, 38);
+            btnInf.Size = new Size(143, 35);
             btnInf.TabIndex = 14;
             btnInf.Text = "Деталі";
             btnInf.UseVisualStyleBackColor = true;
@@ -170,10 +170,10 @@
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAdd.AutoSize = true;
-            btnAdd.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAdd.Location = new Point(1081, 361);
+            btnAdd.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAdd.Location = new Point(1088, 361);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(127, 38);
+            btnAdd.Size = new Size(113, 35);
             btnAdd.TabIndex = 15;
             btnAdd.Text = "Додати";
             btnAdd.UseVisualStyleBackColor = true;

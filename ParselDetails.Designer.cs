@@ -70,6 +70,7 @@
             label7 = new Label();
             comBoxStatus = new ComboBox();
             btnUpd = new Button();
+            btnDel = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -80,8 +81,8 @@
             // 
             btnBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnBack.AutoSize = true;
-            btnBack.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnBack.Location = new Point(12, 431);
+            btnBack.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBack.Location = new Point(12, 429);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(136, 38);
             btnBack.TabIndex = 6;
@@ -94,7 +95,7 @@
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAdd.AutoSize = true;
             btnAdd.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAdd.Location = new Point(248, 431);
+            btnAdd.Location = new Point(256, 429);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(136, 38);
             btnAdd.TabIndex = 7;
@@ -108,7 +109,7 @@
             txtID.Location = new Point(58, 6);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(170, 35);
+            txtID.Size = new Size(186, 35);
             txtID.TabIndex = 9;
             txtID.TextAlign = HorizontalAlignment.Center;
             // 
@@ -125,10 +126,10 @@
             // 
             // txtFirstNS
             // 
-            txtFirstNS.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtFirstNS.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtFirstNS.Location = new Point(163, 77);
             txtFirstNS.Name = "txtFirstNS";
-            txtFirstNS.Size = new Size(209, 35);
+            txtFirstNS.Size = new Size(209, 32);
             txtFirstNS.TabIndex = 11;
             txtFirstNS.TextAlign = HorizontalAlignment.Center;
             txtFirstNS.Enter += txtFirstNS_Enter;
@@ -138,19 +139,19 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label1.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(6, 41);
             label1.Name = "label1";
-            label1.Size = new Size(124, 28);
+            label1.Size = new Size(110, 25);
             label1.TabIndex = 10;
             label1.Text = "Прізвище";
             // 
             // txtLastNS
             // 
-            txtLastNS.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtLastNS.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtLastNS.Location = new Point(163, 38);
             txtLastNS.Name = "txtLastNS";
-            txtLastNS.Size = new Size(209, 35);
+            txtLastNS.Size = new Size(209, 32);
             txtLastNS.TabIndex = 13;
             txtLastNS.TextAlign = HorizontalAlignment.Center;
             txtLastNS.Enter += txtLastNS_Enter;
@@ -160,19 +161,19 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label2.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(6, 80);
             label2.Name = "label2";
-            label2.Size = new Size(58, 28);
+            label2.Size = new Size(51, 25);
             label2.TabIndex = 12;
             label2.Text = "Ім'я";
             // 
             // txtMidlNS
             // 
-            txtMidlNS.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtMidlNS.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtMidlNS.Location = new Point(163, 116);
             txtMidlNS.Name = "txtMidlNS";
-            txtMidlNS.Size = new Size(209, 35);
+            txtMidlNS.Size = new Size(209, 32);
             txtMidlNS.TabIndex = 15;
             txtMidlNS.TextAlign = HorizontalAlignment.Center;
             txtMidlNS.Enter += txtMidlNS_Enter;
@@ -182,19 +183,19 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label3.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(6, 119);
             label3.Name = "label3";
-            label3.Size = new Size(151, 28);
+            label3.Size = new Size(133, 25);
             label3.TabIndex = 14;
             label3.Text = "По батькові";
             // 
             // txtFirstNR
             // 
-            txtFirstNR.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtFirstNR.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtFirstNR.Location = new Point(163, 77);
             txtFirstNR.Name = "txtFirstNR";
-            txtFirstNR.Size = new Size(209, 35);
+            txtFirstNR.Size = new Size(209, 32);
             txtFirstNR.TabIndex = 17;
             txtFirstNR.TextAlign = HorizontalAlignment.Center;
             txtFirstNR.Enter += txtFirstNR_Enter;
@@ -204,19 +205,19 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label4.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(6, 119);
             label4.Name = "label4";
-            label4.Size = new Size(151, 28);
+            label4.Size = new Size(133, 25);
             label4.TabIndex = 16;
             label4.Text = "По батькові";
             // 
             // txtLastNR
             // 
-            txtLastNR.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtLastNR.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtLastNR.Location = new Point(163, 38);
             txtLastNR.Name = "txtLastNR";
-            txtLastNR.Size = new Size(209, 35);
+            txtLastNR.Size = new Size(209, 32);
             txtLastNR.TabIndex = 19;
             txtLastNR.TextAlign = HorizontalAlignment.Center;
             txtLastNR.Enter += txtLastNR_Enter;
@@ -226,19 +227,19 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label5.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(6, 41);
             label5.Name = "label5";
-            label5.Size = new Size(124, 28);
+            label5.Size = new Size(110, 25);
             label5.TabIndex = 18;
             label5.Text = "Прізвище";
             // 
             // txtMidlNR
             // 
-            txtMidlNR.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtMidlNR.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtMidlNR.Location = new Point(163, 116);
             txtMidlNR.Name = "txtMidlNR";
-            txtMidlNR.Size = new Size(209, 35);
+            txtMidlNR.Size = new Size(209, 32);
             txtMidlNR.TabIndex = 21;
             txtMidlNR.TextAlign = HorizontalAlignment.Center;
             txtMidlNR.Enter += txtMidlNR_Enter;
@@ -248,19 +249,19 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label6.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(6, 80);
             label6.Name = "label6";
-            label6.Size = new Size(58, 28);
+            label6.Size = new Size(51, 25);
             label6.TabIndex = 20;
             label6.Text = "Ім'я";
             // 
             // txtNumS
             // 
-            txtNumS.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNumS.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtNumS.Location = new Point(163, 157);
             txtNumS.Name = "txtNumS";
-            txtNumS.Size = new Size(209, 35);
+            txtNumS.Size = new Size(209, 32);
             txtNumS.TabIndex = 23;
             txtNumS.TextAlign = HorizontalAlignment.Center;
             txtNumS.Enter += txtNumS_Enter;
@@ -270,19 +271,19 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label10.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label10.Location = new Point(6, 41);
             label10.Name = "label10";
-            label10.Size = new Size(108, 28);
+            label10.Size = new Size(96, 25);
             label10.TabIndex = 28;
             label10.Text = "Область";
             // 
             // txtWeight
             // 
-            txtWeight.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtWeight.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtWeight.Location = new Point(74, 38);
             txtWeight.Name = "txtWeight";
-            txtWeight.Size = new Size(69, 35);
+            txtWeight.Size = new Size(69, 32);
             txtWeight.TabIndex = 31;
             txtWeight.TextAlign = HorizontalAlignment.Center;
             txtWeight.Enter += txtWeight_Enter;
@@ -292,10 +293,10 @@
             // 
             label11.AutoSize = true;
             label11.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label11.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label11.Location = new Point(6, 41);
             label11.Name = "label11";
-            label11.Size = new Size(67, 28);
+            label11.Size = new Size(59, 25);
             label11.TabIndex = 30;
             label11.Text = "Вага";
             // 
@@ -303,19 +304,19 @@
             // 
             label12.AutoSize = true;
             label12.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label12.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label12.Location = new Point(6, 83);
             label12.Name = "label12";
-            label12.Size = new Size(181, 28);
+            label12.Size = new Size(160, 25);
             label12.TabIndex = 32;
             label12.Text = "Статус оплати";
             // 
             // txtCost
             // 
-            txtCost.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtCost.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtCost.Location = new Point(242, 39);
             txtCost.Name = "txtCost";
-            txtCost.Size = new Size(130, 35);
+            txtCost.Size = new Size(130, 32);
             txtCost.TabIndex = 37;
             txtCost.TextAlign = HorizontalAlignment.Center;
             txtCost.Enter += txtCost_Enter;
@@ -342,7 +343,7 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txtMidlNS);
             groupBox1.Controls.Add(txtNumS);
-            groupBox1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox1.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 47);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(378, 199);
@@ -354,10 +355,10 @@
             // 
             label19.AutoSize = true;
             label19.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label19.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label19.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label19.Location = new Point(6, 160);
             label19.Name = "label19";
-            label19.Size = new Size(87, 28);
+            label19.Size = new Size(77, 25);
             label19.TabIndex = 24;
             label19.Text = "Номер";
             // 
@@ -372,8 +373,8 @@
             groupBox2.Controls.Add(txtLastNR);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(txtMidlNR);
-            groupBox2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox2.Location = new Point(402, 47);
+            groupBox2.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox2.Location = new Point(410, 47);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(378, 200);
             groupBox2.TabIndex = 43;
@@ -384,19 +385,19 @@
             // 
             label20.AutoSize = true;
             label20.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label20.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label20.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label20.Location = new Point(6, 160);
             label20.Name = "label20";
-            label20.Size = new Size(87, 28);
+            label20.Size = new Size(77, 25);
             label20.TabIndex = 26;
             label20.Text = "Номер";
             // 
             // txtNumR
             // 
-            txtNumR.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNumR.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtNumR.Location = new Point(163, 157);
             txtNumR.Name = "txtNumR";
-            txtNumR.Size = new Size(209, 35);
+            txtNumR.Size = new Size(209, 32);
             txtNumR.TabIndex = 25;
             txtNumR.TextAlign = HorizontalAlignment.Center;
             txtNumR.Enter += txtNumR_Enter;
@@ -406,11 +407,11 @@
             // 
             comBoxReg.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxReg.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxReg.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxReg.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxReg.FormattingEnabled = true;
             comBoxReg.Location = new Point(120, 38);
             comBoxReg.Name = "comBoxReg";
-            comBoxReg.Size = new Size(252, 36);
+            comBoxReg.Size = new Size(252, 33);
             comBoxReg.TabIndex = 44;
             comBoxReg.TextChanged += comBoxReg_TextChanged;
             // 
@@ -422,7 +423,7 @@
             groupBox3.Controls.Add(comBoxCity);
             groupBox3.Controls.Add(label10);
             groupBox3.Controls.Add(comBoxReg);
-            groupBox3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox3.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.Location = new Point(12, 256);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(378, 166);
@@ -434,10 +435,10 @@
             // 
             label18.AutoSize = true;
             label18.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label18.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label18.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label18.Location = new Point(6, 125);
             label18.Name = "label18";
-            label18.Size = new Size(140, 28);
+            label18.Size = new Size(124, 25);
             label18.TabIndex = 47;
             label18.Text = "Відділення";
             // 
@@ -445,11 +446,11 @@
             // 
             comBoxOfNum.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxOfNum.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxOfNum.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxOfNum.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxOfNum.FormattingEnabled = true;
             comBoxOfNum.Location = new Point(165, 122);
             comBoxOfNum.Name = "comBoxOfNum";
-            comBoxOfNum.Size = new Size(207, 36);
+            comBoxOfNum.Size = new Size(207, 33);
             comBoxOfNum.TabIndex = 48;
             comBoxOfNum.TextChanged += comBoxOfNum_TextChanged;
             // 
@@ -457,10 +458,10 @@
             // 
             label17.AutoSize = true;
             label17.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label17.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label17.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label17.Location = new Point(6, 83);
             label17.Name = "label17";
-            label17.Size = new Size(74, 28);
+            label17.Size = new Size(68, 25);
             label17.TabIndex = 45;
             label17.Text = "Місто";
             // 
@@ -468,11 +469,11 @@
             // 
             comBoxCity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxCity.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxCity.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxCity.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxCity.FormattingEnabled = true;
             comBoxCity.Location = new Point(120, 80);
             comBoxCity.Name = "comBoxCity";
-            comBoxCity.Size = new Size(252, 36);
+            comBoxCity.Size = new Size(252, 33);
             comBoxCity.TabIndex = 46;
             comBoxCity.TextChanged += comBoxCity_TextChanged;
             // 
@@ -489,8 +490,8 @@
             groupBox4.Controls.Add(label12);
             groupBox4.Controls.Add(txtCost);
             groupBox4.Controls.Add(label14);
-            groupBox4.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox4.Location = new Point(402, 256);
+            groupBox4.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox4.Location = new Point(410, 256);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(378, 217);
             groupBox4.TabIndex = 49;
@@ -501,10 +502,10 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label8.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label8.Location = new Point(6, 125);
             label8.Name = "label8";
-            label8.Size = new Size(90, 28);
+            label8.Size = new Size(81, 25);
             label8.TabIndex = 53;
             label8.Text = "Статус";
             // 
@@ -512,12 +513,12 @@
             // 
             comBoxPStatus.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxPStatus.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxPStatus.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxPStatus.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxPStatus.FormattingEnabled = true;
             comBoxPStatus.Items.AddRange(new object[] { "Оплачено", "Не оплачено" });
             comBoxPStatus.Location = new Point(193, 80);
             comBoxPStatus.Name = "comBoxPStatus";
-            comBoxPStatus.Size = new Size(179, 36);
+            comBoxPStatus.Size = new Size(179, 33);
             comBoxPStatus.TabIndex = 52;
             comBoxPStatus.TextChanged += comBoxPStatus_TextChanged;
             // 
@@ -525,12 +526,12 @@
             // 
             comBoxParType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxParType.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxParType.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxParType.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxParType.FormattingEnabled = true;
             comBoxParType.Items.AddRange(new object[] { "Документи", "Електроніка", "Крихка" });
             comBoxParType.Location = new Point(125, 167);
             comBoxParType.Name = "comBoxParType";
-            comBoxParType.Size = new Size(247, 36);
+            comBoxParType.Size = new Size(247, 33);
             comBoxParType.TabIndex = 51;
             comBoxParType.TextChanged += comBoxParType_TextChanged;
             // 
@@ -538,10 +539,10 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.FromArgb(0, 0, 0, 128);
-            label7.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label7.Location = new Point(8, 170);
             label7.Name = "label7";
-            label7.Size = new Size(56, 28);
+            label7.Size = new Size(50, 25);
             label7.TabIndex = 50;
             label7.Text = "Тип";
             // 
@@ -549,12 +550,12 @@
             // 
             comBoxStatus.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxStatus.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            comBoxStatus.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxStatus.FormattingEnabled = true;
             comBoxStatus.Items.AddRange(new object[] { "Доставлено", "В дорозі", "Отримано" });
             comBoxStatus.Location = new Point(163, 122);
             comBoxStatus.Name = "comBoxStatus";
-            comBoxStatus.Size = new Size(209, 36);
+            comBoxStatus.Size = new Size(209, 33);
             comBoxStatus.TabIndex = 49;
             comBoxStatus.TextChanged += comBoxStatus_TextChanged;
             // 
@@ -562,8 +563,8 @@
             // 
             btnUpd.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnUpd.AutoSize = true;
-            btnUpd.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnUpd.Location = new Point(248, 431);
+            btnUpd.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnUpd.Location = new Point(256, 429);
             btnUpd.Name = "btnUpd";
             btnUpd.Size = new Size(136, 38);
             btnUpd.TabIndex = 50;
@@ -571,13 +572,27 @@
             btnUpd.UseVisualStyleBackColor = true;
             btnUpd.Click += btnUpd_Click;
             // 
+            // btnDel
+            // 
+            btnDel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDel.AutoSize = true;
+            btnDel.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDel.Location = new Point(187, 429);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(38, 38);
+            btnDel.TabIndex = 51;
+            btnDel.Text = "X";
+            btnDel.UseVisualStyleBackColor = true;
+            btnDel.Click += btnDel_Click;
+            // 
             // ParselDetails
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(789, 481);
+            ClientSize = new Size(797, 479);
             ControlBox = false;
+            Controls.Add(btnDel);
             Controls.Add(btnUpd);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -651,5 +666,6 @@
         private ComboBox comBoxPStatus;
         private Label label8;
         private Button btnUpd;
+        private Button btnDel;
     }
 }

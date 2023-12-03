@@ -224,7 +224,7 @@ namespace TrackEZ
                 String newOfficeNumber;
                 int id;
 
-                if (e.RowIndex >= 0 && (rowCount == dataGridView1.RowCount || nowSearch) )
+                if (e.RowIndex >= 0 && (rowCount == dataGridView1.RowCount || nowSearch))
                 {
                     id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                     if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
@@ -309,8 +309,8 @@ namespace TrackEZ
             cmd.Parameters.AddWithValue("@isOwner", newIsOvner);
             cmd.Parameters.AddWithValue("@newSName", newSName);
             dB.openConnection();
-            cmd.ExecuteNonQuery(); 
-            dB.closeConnection() ;
+            cmd.ExecuteNonQuery();
+            dB.closeConnection();
             cmd = new MySqlCommand("SELECT * FROM `trackez`.`admin_accounts`", dB.getConnection());
             DataTable dataTable = new DataTable();
             adapter.SelectCommand = cmd;
@@ -329,7 +329,7 @@ namespace TrackEZ
             cmd.Parameters.AddWithValue("@id", id);
             dB.openConnection();
             cmd.ExecuteNonQuery();
-            dB.closeConnection() ;
+            dB.closeConnection();
             cmd = new MySqlCommand("SELECT * FROM `trackez`.`post_offices`", dB.getConnection());
             DataTable dataTable = new DataTable();
             adapter.SelectCommand = cmd;
@@ -347,7 +347,7 @@ namespace TrackEZ
             cmd.Parameters.AddWithValue("@newOfficeNumber", newOfficeNumber);
             dB.openConnection();
             cmd.ExecuteNonQuery();
-            dB.closeConnection() ;
+            dB.closeConnection();
             cmd = new MySqlCommand("SELECT * FROM `trackez`.`post_offices`", dB.getConnection());
             DataTable dataTable = new DataTable();
             adapter.SelectCommand = cmd;
@@ -380,7 +380,6 @@ namespace TrackEZ
             {
                 DB dB = new DB();
                 int recordId = Convert.ToInt32(selectedRow.Cells[0].Value);
-                MessageBox.Show("r " + recordId);
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM `trackez`.`admin_accounts` WHERE `id` = @recordId", dB.getConnection());
                 cmd.Parameters.AddWithValue("@recordId", recordId);
                 dB.openConnection();
@@ -472,16 +471,19 @@ namespace TrackEZ
                         doSearch();
                     }
                 }
-                else if (e.KeyCode == Keys.Q)
+                if (!txtSh.Focused)
                 {
-                    showInf();
-                }
-                else if (e.KeyCode == Keys.W)
-                {
-                    this.Hide();
-                    int selectID = -1;
-                    ParselDetails parselDetails = new ParselDetails(isOvner, selectTable, selectID);
-                    parselDetails.Show();
+                    if (e.KeyCode == Keys.Q)
+                    {
+                        showInf();
+                    }
+                    else if (e.KeyCode == Keys.W)
+                    {
+                        this.Hide();
+                        int selectID = -1;
+                        ParselDetails parselDetails = new ParselDetails(isOvner, selectTable, selectID);
+                        parselDetails.Show();
+                    }
                 }
             }
             else
@@ -595,10 +597,11 @@ namespace TrackEZ
                     dataGridView1.DataSource = dataTable;
                     dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                     rowCountSearch = dataGridView1.Rows.Count;
-                    if (dataTable.DefaultView.Count != rowCount) {
+                    if (dataTable.DefaultView.Count != rowCount)
+                    {
                         nowSearch = true;
                         dataGridView1.AllowUserToAddRows = false;
-                    }                      
+                    }
                 }
                 else if (rowCountSearch <= rowCount && nowSearch)
                 {

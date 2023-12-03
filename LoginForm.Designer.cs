@@ -39,7 +39,7 @@
             // btnLog
             // 
             btnLog.AutoSize = true;
-            btnLog.Font = new Font("Verdana", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLog.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnLog.Location = new Point(138, 305);
             btnLog.Name = "btnLog";
             btnLog.Size = new Size(113, 43);
@@ -62,18 +62,18 @@
             // txtLogin
             // 
             txtLogin.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtLogin.Location = new Point(122, 128);
+            txtLogin.Location = new Point(105, 128);
             txtLogin.Name = "txtLogin";
-            txtLogin.Size = new Size(144, 35);
+            txtLogin.Size = new Size(186, 35);
             txtLogin.TabIndex = 4;
             txtLogin.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPsw
             // 
             txtPsw.Font = new Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtPsw.Location = new Point(122, 229);
+            txtPsw.Location = new Point(105, 229);
             txtPsw.Name = "txtPsw";
-            txtPsw.Size = new Size(144, 35);
+            txtPsw.Size = new Size(186, 35);
             txtPsw.TabIndex = 5;
             txtPsw.TextAlign = HorizontalAlignment.Center;
             // 
