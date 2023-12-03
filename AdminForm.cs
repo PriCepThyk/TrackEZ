@@ -79,7 +79,7 @@ namespace TrackEZ
                     rowCountOnDB = dataGridView1.Rows.Count - 1;
                     break;
                 case 3:
-                    adapter = new MySqlDataAdapter("SELECT `ID`, `parcel_number`, CONCAT(`sender_first_name`, ' ', `sender_last_name`, ' ', `sender_middle_name`) AS `sender_full_name`, `sender_phone_number`, CONCAT(`recipient_first_name`, ' ', `recipient_last_name`, ' ', `recipient_middle_name`) AS `recipient_full_name`, `status`, `payment_status`, `cost` FROM `trackez`.`parcels`", dB.getConnection());
+                    adapter = new MySqlDataAdapter("SELECT `ID`, `parcel_number`, CONCAT(`sender_first_name`, ' ', `sender_last_name`, ' ', `sender_middle_name`) AS `sender_full_name`, `recipient_phone_number`, CONCAT(`recipient_first_name`, ' ', `recipient_last_name`, ' ', `recipient_middle_name`) AS `recipient_full_name`, `status`, `payment_status`, `cost` FROM `trackez`.`parcels`", dB.getConnection());
                     if (dataSet != null && dataSet.Tables.Contains("parcels"))
                     {
                         dataSet.Tables["parcels"].Clear();
@@ -374,6 +374,7 @@ namespace TrackEZ
             DataTable dataTable = new DataTable();
             adapter.SelectCommand = cmd;
             adapter.Fill(dataTable);
+            
         }
         private void addDataInDepDatabase(String newRegion, String newCity, String newStreet, String newBuildingNumber, String newOfficeNumber)
         {
@@ -407,19 +408,22 @@ namespace TrackEZ
                 if (e.KeyCode == Keys.Delete && (rowCount == dataGridView1.RowCount || nowSearch))
                 {
                     if (selectTable == 1)
-                        DeleteRecordProfFromDatabase(dataGridView1.CurrentRow);
+                        DeleteRecordProfFromDatabase();
                     else if (selectTable == 2)
-                        DeleteRecordDepFromDatabase(dataGridView1.CurrentRow);
+                        DeleteRecordDepFromDatabase();
                 }
             }
         }
 
-        private void DeleteRecordProfFromDatabase(DataGridViewRow selectedRow)
+        private void DeleteRecordProfFromDatabase()
         {
-            if (selectedRow != null)
+            int selectedRowIndex = -1;
+            if (dataGridView1.SelectedCells.Count > 0)
             {
+                selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                selectTableF();
                 DB dB = new DB();
-                int recordId = Convert.ToInt32(selectedRow.Cells[0].Value);
+                int recordId = Convert.ToInt32(dataGridView1[0, selectedRowIndex].Value.ToString());
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM `trackez`.`admin_accounts` WHERE `id` = @recordId", dB.getConnection());
                 cmd.Parameters.AddWithValue("@recordId", recordId);
                 dB.openConnection();
@@ -427,16 +431,18 @@ namespace TrackEZ
                 dB.closeConnection();
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                 selectTableF();
-                rowCount = dataGridView1.RowCount;
             }
         }
 
-        private void DeleteRecordDepFromDatabase(DataGridViewRow selectedRow)
+        private void DeleteRecordDepFromDatabase()
         {
-            if (selectedRow != null)
+            int selectedRowIndex = -1;
+            if (dataGridView1.SelectedCells.Count > 0)
             {
+                selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                selectTableF();
                 DB dB = new DB();
-                int recordId = Convert.ToInt32(selectedRow.Cells[0].Value);
+                int recordId = Convert.ToInt32(dataGridView1[0, selectedRowIndex].Value.ToString());
                 MySqlCommand cmd = new MySqlCommand("DELETE FROM `trackez`.`post_offices` WHERE `id` = @recordId", dB.getConnection());
                 cmd.Parameters.AddWithValue("@recordId", recordId);
                 dB.openConnection();
@@ -444,7 +450,6 @@ namespace TrackEZ
                 dB.closeConnection();
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                 selectTableF();
-                rowCount = dataGridView1.RowCount;
             }
         }
 

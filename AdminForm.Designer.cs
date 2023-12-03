@@ -124,11 +124,11 @@
             // 
             comBoxSh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comBoxSh.DropDownStyle = ComboBoxStyle.DropDownList;
-            comBoxSh.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            comBoxSh.Font = new Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             comBoxSh.FormattingEnabled = true;
             comBoxSh.Location = new Point(1048, 31);
             comBoxSh.Name = "comBoxSh";
-            comBoxSh.Size = new Size(193, 33);
+            comBoxSh.Size = new Size(193, 30);
             comBoxSh.TabIndex = 9;
             // 
             // txtSh
