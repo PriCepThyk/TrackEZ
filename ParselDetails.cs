@@ -2,6 +2,8 @@
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
+using System.Reflection;
+using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace TrackEZ
@@ -16,11 +18,13 @@ namespace TrackEZ
         private String tempTxtData;
         private int departID;
         private bool[] myArray = new bool[14];
+        private bool dataIsSet = false;
 
         private int eskCount;
         public ParselDetails(bool isOvnerP, int selectTableP, int selectIDP)
         {
             InitializeComponent();
+            setRegionColection();
             tempTxtData = string.Empty;
             isOvner = isOvnerP;
             selectTable = selectTableP;
@@ -36,19 +40,21 @@ namespace TrackEZ
                 btnUpd.Visible = false;
                 txtID.Visible = false;
                 lbID.Visible = false;
-                setRegionColection();
             }
             else
             {
                 btnAdd.Visible = false;
                 btnUpd.Visible = true;
-                setRegionColection();
-                setOllDataToTxtBox(selectID);
+                if (!setOllDataToTxtBox(selectID))
+                    setOllDataToTxtBox(selectID);
             }
+
+            if (isOvner && actions == 1)
+                btnDel.Visible = true;
+            else btnDel.Visible = false;
             btnUpd.Enabled = false;
             btnAdd.Enabled = false;
             canPush = false;
-            //MessageBox.Show("Значення у форматі int: " + selectID.ToString());
 
         }
 
@@ -64,6 +70,7 @@ namespace TrackEZ
                         AdminForm adminForm = new AdminForm(isOvner, selectTable);
                         adminForm.Show();
                     }
+                    eskCount++;
                 }
                 else
                 {
@@ -71,7 +78,7 @@ namespace TrackEZ
                     AdminForm adminForm = new AdminForm(isOvner, selectTable);
                     adminForm.Show();
                 }
-                eskCount++;
+
             }
 
             if (eskCount > 5)
@@ -96,90 +103,60 @@ namespace TrackEZ
             AdminForm adminForm = new AdminForm(isOvner, selectTable);
             adminForm.Show();
         }
-        private void setOllDataToTxtBox(int recIDP)
+        private bool setOllDataToTxtBox(int recIDP)
         {
-
-            string sql = "SELECT " +
-                "p.ID AS ParcelID, " +
-                "p.parcel_number AS ParcelNumber, " +
-                "p.sender_first_name AS SenderFirstName, " +
-                "p.sender_last_name AS SenderLastName, " +
-                "p.sender_middle_name AS SenderMiddleName, " +
-                "p.sender_phone_number AS SenderPhoneNumber, " +
-                "p.recipient_first_name AS RecipientFirstName, " +
-                "p.recipient_last_name AS RecipientLastName, " +
-                "p.recipient_middle_name AS RecipientMiddleName, " +
-                "p.recipient_phone_number AS RecipientPhoneNumber, " +
-                "p.send_datetime AS SendDatetime, " +
-                "p.estimated_arrival_datetime AS EstimatedArrivalDatetime, " +
-                "p.weight AS Weight, " +
-                "p.status AS Status, " +
-                "p.parcel_type AS ParcelType, " +
-                "p.cost AS Cost, " +
-                "p.payment_status AS PaymentStatus, " +
-                "p.depart_ID AS DepartID, " +
-                "po.ID AS PostOfficeID, " +
-                "po.region AS Region, " +
-                "po.city AS City, " +
-                "po.street AS Street, " +
-                "po.building_number AS BuildingNumber, " +
-                "po.office_number AS OfficeNumber " +
-                "FROM parcels p " +
-                "INNER JOIN post_offices po ON p.depart_ID = po.ID WHERE p.ID = " + recIDP + "";
-            DB dB = new DB();
-            MySqlCommand command = new MySqlCommand(sql, dB.getConnection());
-            command.CommandText = sql;
-            command.CommandType = CommandType.Text;
-            dB.openConnection();
-            using (MySqlDataReader reader = command.ExecuteReader())
+            if (!dataIsSet)
             {
-                while (reader.Read())
+                string sql = "SELECT parcels.*, post_offices.* FROM parcels JOIN post_offices ON parcels.depart_ID = post_offices.ID WHERE parcels.ID = " + recIDP + "";
+                DB dB = null;
+                try
                 {
-                    int parcelID = reader.GetInt32("ParcelID");
-                    String parcelNumber = reader.GetString("ParcelNumber");
-                    txtID.Text = parcelNumber;
-                    String senderFirstName = reader.GetString("SenderFirstName");
-                    txtFirstNS.Text = senderFirstName;
-                    String senderLastName = reader.GetString("SenderLastName");
-                    txtLastNS.Text = senderLastName;
-                    String senderMiddleName = reader.GetString("SenderMiddleName");
-                    txtMidlNS.Text = senderMiddleName;
-                    String senderPhoneNumber = reader.GetString("SenderPhoneNumber");
-                    txtNumS.Text = senderPhoneNumber;
-                    String recipientFirstName = reader.GetString("RecipientFirstName");
-                    txtFirstNR.Text = recipientFirstName;
-                    String recipientLastName = reader.GetString("RecipientLastName");
-                    txtLastNR.Text = recipientLastName;
-                    String recipientMiddleName = reader.GetString("RecipientMiddleName");
-                    txtMidlNR.Text = recipientMiddleName;
-                    String recipientPhoneNumber = reader.GetString("RecipientPhoneNumber");
-                    txtNumR.Text = recipientPhoneNumber;
-                    // DateTime sendDatetime = reader.GetDateTime("SendDatetime");
-                    // DateTime estimatedArrivalDatetime = reader.GetDateTime("EstimatedArrivalDatetime");
-                    double weight = reader.GetDouble("Weight");
-                    txtWeight.Text = weight.ToString();
-                    String status = reader.GetString("Status");
-                    comBoxStatus.Text = status;
-                    String parcelType = reader.GetString("ParcelType");
-                    comBoxParType.Text = parcelType;
-                    double cost = reader.GetDouble("Cost");
-                    txtCost.Text = cost.ToString();
-                    String paymentStatus = reader.GetString("PaymentStatus");
-                    comBoxPStatus.Text = paymentStatus;
-                    //int departID = reader.GetInt32("DepartID");
-                    //int postOfficeID = reader.GetInt32("PostOfficeID");
-                    String region = reader.GetString("Region");
-                    comBoxReg.Text = region;
-                    String city = reader.GetString("City");
-                    comBoxCity.Text = city;
-                    //String street = reader.GetString("Street");
-                    //String buildingNumber = reader.GetString("BuildingNumber");
-                    String officeNumber = reader.GetString("OfficeNumber");
-                    comBoxOfNum.Text = officeNumber;
+                    dB = new DB();
+                    using (MySqlCommand command = new MySqlCommand(sql, dB.getConnection()))
+                    {
+                        //command.Parameters.AddWithValue("@RecID", recIDP);
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            if (dataTable.Rows.Count > 0)
+                            {
+                                DataRow row = dataTable.Rows[0];
+                                txtID.Text = row["parcel_number"].ToString();
+                                txtFirstNS.Text = row["sender_first_name"].ToString();
+                                txtLastNS.Text = row["sender_last_name"].ToString();
+                                txtMidlNS.Text = row["sender_middle_name"].ToString();
+                                txtNumS.Text = row["sender_phone_number"].ToString();
+                                txtFirstNR.Text = row["recipient_first_name"].ToString();
+                                txtLastNR.Text = row["recipient_last_name"].ToString();
+                                txtMidlNR.Text = row["recipient_middle_name"].ToString();
+                                txtNumR.Text = row["recipient_phone_number"].ToString();
+                                txtWeight.Text = row["weight"].ToString();
+                                comBoxStatus.Text = row["status"].ToString();
+                                comBoxParType.Text = row["parcel_type"].ToString();
+                                txtCost.Text = row["cost"].ToString();
+                                comBoxPStatus.Text = row["payment_status"].ToString();
+                                comBoxReg.Text = row["region"].ToString();
+                                comBoxCity.Text = row["city"].ToString();
+                                comBoxOfNum.Text = row["office_number"].ToString();
+                                dataIsSet = true;
+                                return true;
+                            }
+                        }
+                    }
                 }
-                reader.Close();
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Помилка: " + ex.Message);
+                }
+                dataIsSet = false;
+                return false;
             }
-            dB.closeConnection();
+            else
+            {
+                return true;
+            }
         }
         private void setRegionColection()
         {
@@ -258,7 +235,7 @@ namespace TrackEZ
                                 "@sendDatetime, @estimatedArrivalDatetime, @weight, @status, @parcelType, @cost, @paymentStatus, @departID)";
             MySqlCommand insertCommand = new MySqlCommand(insertSql, dB.getConnection());
             // Додавання параметрів із текстових полів
-            insertCommand.Parameters.AddWithValue("@parcelNumber", 1234345);
+            insertCommand.Parameters.AddWithValue("@parcelNumber", getMaxNumPars() + 1);
             insertCommand.Parameters.AddWithValue("@senderFirstName", txtFirstNS.Text.ToString());
             insertCommand.Parameters.AddWithValue("@senderLastName", txtLastNS.Text.ToString());
             insertCommand.Parameters.AddWithValue("@senderMiddleName", txtMidlNS.Text.ToString());
@@ -278,6 +255,7 @@ namespace TrackEZ
             dB.openConnection();
             insertCommand.ExecuteNonQuery();
             dB.closeConnection();
+            MessageBox.Show("Запис додано");
         }
 
         private void btnUpd_Click(object sender, EventArgs e)
@@ -318,6 +296,7 @@ namespace TrackEZ
             dB.openConnection();
             updateCommand.ExecuteNonQuery();
             dB.closeConnection();
+            MessageBox.Show("Дані оновлено");
         }
         private void checkEnBtn()
         {
@@ -679,28 +658,54 @@ namespace TrackEZ
                 }
             }
             checkEnBtn();
-            
+
             DB dB = new DB();
             DataTable dataTable = new DataTable();
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `post_offices` WHERE `region`='"+comBoxReg.Text.ToString()+"' AND `city` = '"+comBoxCity.Text.ToString()+"' AND `office_number`='"+comBoxOfNum.Text.ToString()+"';", dB.getConnection());
-            try
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `post_offices` WHERE `region`='" + comBoxReg.Text.ToString() + "' AND `city` = '" + comBoxCity.Text.ToString() + "' AND `office_number`='" + comBoxOfNum.Text.ToString() + "';", dB.getConnection());
+            adapter.SelectCommand = cmd;
+            adapter.Fill(dataTable);
+            String idOff;
+            if (dataTable.Rows.Count > 0 && dataTable.Columns.Contains("ID"))
             {
-                adapter.SelectCommand = cmd;
-                adapter.Fill(dataTable);
-                String idOff;
-                if (dataTable.Rows.Count > 0 && dataTable.Columns.Contains("ID"))
-                {
-                    idOff = dataTable.Rows[0]["ID"].ToString();
-                    departID = Convert.ToInt32(idOff);
-                }
+                idOff = dataTable.Rows[0]["ID"].ToString();
+                departID = Convert.ToInt32(idOff);
             }
-            catch (MySqlException ex)
+        }
+        private int getMaxNumPars()
+        {
+            DB dB = new DB();
+            DataTable dataTable = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT MAX(parcel_number) AS max_parcel_number FROM parcels;", dB.getConnection());
+            adapter.SelectCommand = cmd;
+            adapter.Fill(dataTable);
+            String maxId;
+            if (dataTable.Rows.Count > 0 && dataTable.Columns.Contains("max_parcel_number"))
             {
-                MessageBox.Show("Помилка: " + ex.Message);
+                maxId = dataTable.Rows[0]["max_parcel_number"].ToString();
+                int maxID = Convert.ToInt32(maxId);
+                return maxID;
             }
-            dB.closeConnection();
+            return 0;
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text != string.Empty)
+            {
+                DB dB = new DB();
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM parcels WHERE ID = @recordId", dB.getConnection());
+                cmd.Parameters.AddWithValue("@recordId", selectID);
+                dB.openConnection();
+                cmd.ExecuteNonQuery();
+                dB.closeConnection();
+                this.Hide();
+                AdminForm adminForm = new AdminForm(isOvner, selectTable);
+                adminForm.Show();
+            }
         }
     }
 }
