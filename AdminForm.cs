@@ -9,9 +9,11 @@ namespace TrackEZ
     {
         private int selectTable;
         private int rowCount;
+        private int rowCountOnDB;
         private bool isOvner;
         private bool nowSearch;
         private int rowCountSearch;
+        private bool addNewRowGread;
         private DataTable dataTable;
         private Dictionary<DataGridViewCell, object> originalValues = new Dictionary<DataGridViewCell, object>();
 
@@ -63,6 +65,7 @@ namespace TrackEZ
                     adapter.Fill(dataSet, "admin_accounts");
                     bindingSource.DataSource = dataSet.Tables["admin_accounts"];
                     dataGridView1.DataSource = bindingSource;
+                    rowCountOnDB = dataGridView1.Rows.Count - 1;
                     break;
                 case 2:
                     adapter = new MySqlDataAdapter("SELECT * FROM `trackez`.`post_offices`", dB.getConnection());
@@ -73,6 +76,7 @@ namespace TrackEZ
                     adapter.Fill(dataSet, "post_offices");
                     bindingSource.DataSource = dataSet.Tables["post_offices"];
                     dataGridView1.DataSource = bindingSource;
+                    rowCountOnDB = dataGridView1.Rows.Count - 1;
                     break;
                 case 3:
                     adapter = new MySqlDataAdapter("SELECT `ID`, `parcel_number`, CONCAT(`sender_first_name`, ' ', `sender_last_name`, ' ', `sender_middle_name`) AS `sender_full_name`, `sender_phone_number`, CONCAT(`recipient_first_name`, ' ', `recipient_last_name`, ' ', `recipient_middle_name`) AS `recipient_full_name`, `status`, `payment_status`, `cost` FROM `trackez`.`parcels`", dB.getConnection());
@@ -83,6 +87,7 @@ namespace TrackEZ
                     adapter.Fill(dataSet, "parcels");
                     bindingSource.DataSource = dataSet.Tables["parcels"];
                     dataGridView1.DataSource = bindingSource;
+                    rowCountOnDB = dataGridView1.Rows.Count - 1;
                     break;
                 default:
                     break;
@@ -135,7 +140,29 @@ namespace TrackEZ
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= rowCountOnDB)
+            {
+                addNewRowGread = true;
+                dataGridView1.AllowUserToAddRows = false;
+                rowCount = dataGridView1.RowCount;
+            }
+
             DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+            if (selectTable == 1 && e.ColumnIndex == 1)
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    DataGridViewCell targetCell = row.Cells[e.ColumnIndex];
+                    if (e.RowIndex != row.Index)
+                    {
+                        if (targetCell.Value != null && targetCell.Value.Equals(cell.Value))
+                        {
+                            cell.Value = originalValues[cell];
+                            break;
+                        }
+                    }
+                }
+            }
             if (string.IsNullOrEmpty(cell.Value?.ToString()))
             {
                 if (originalValues.ContainsKey(cell))
@@ -157,8 +184,9 @@ namespace TrackEZ
                 bool newIsOvner;
                 int id;
 
-                if (e.RowIndex >= 0 && (rowCount == dataGridView1.RowCount || nowSearch))
+                if (e.RowIndex >= 0 && e.RowIndex < rowCountOnDB && !nowSearch)
                 {
+
                     id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                     if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
                         newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -180,11 +208,11 @@ namespace TrackEZ
                         newIsOvner = (bool)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
                     else
                         return;
-
                     updateDataInProfDatabase(id, newLogon, newPassword, newName, newSName, newIsOvner);
                 }
-                else if (rowCount < dataGridView1.RowCount)
+                else if (!nowSearch)
                 {
+
                     if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
                         newLogon = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                     else
@@ -211,9 +239,15 @@ namespace TrackEZ
                     else
                         return;
                     dataGridView1.Rows[e.RowIndex].Cells[0].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex - 1].Cells[0].Value) + 1;
+                    addNewRowGread = false;
+                    dataGridView1.AllowUserToAddRows = true;
                     rowCount = dataGridView1.RowCount;
+                    rowCountOnDB = dataGridView1.Rows.Count - 1;
                     addDataInProfDatabase(newLogon, newPassword, newName, newSName, newIsOvner);
+
                 }
+                else
+                    MessageBox.Show("Закінчіть пошук та виберіт поле для пошукку");
             }
             else if (selectTable == 2)
             {
@@ -224,8 +258,9 @@ namespace TrackEZ
                 String newOfficeNumber;
                 int id;
 
-                if (e.RowIndex >= 0 && (rowCount == dataGridView1.RowCount || nowSearch))
+                if (e.RowIndex >= 0 && e.RowIndex < rowCountOnDB)
                 {
+
                     id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
                     if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
                         newRegion = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -249,9 +284,11 @@ namespace TrackEZ
                         return;
 
                     updateDataInDepDatabase(id, newRegion, newCity, newStreet, newBuildingNumber, newOfficeNumber);
+
                 }
-                else if (rowCount < dataGridView1.RowCount)
+                else
                 {
+
                     if (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() != "")
                         newRegion = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                     else
@@ -274,7 +311,10 @@ namespace TrackEZ
                         return;
 
                     dataGridView1.Rows[e.RowIndex].Cells[0].Value = Convert.ToInt32(dataGridView1.Rows[e.RowIndex - 1].Cells[0].Value) + 1;
+                    addNewRowGread = false;
+                    dataGridView1.AllowUserToAddRows = true;
                     rowCount = dataGridView1.RowCount;
+                    rowCountOnDB = dataGridView1.Rows.Count - 1;
                     addDataInDepDatabase(newRegion, newCity, newStreet, newBuildingNumber, newOfficeNumber);
                 }
             }
@@ -490,11 +530,13 @@ namespace TrackEZ
             {
                 if (e.KeyCode == Keys.Escape)
                 {
-                    if (nowSearch)
+                    if (nowSearch || rowCount != dataGridView1.RowCount || addNewRowGread)
                     {
                         selectTableF();
                         dataGridView1.AllowUserToAddRows = true;
                         nowSearch = false;
+                        addNewRowGread = false;
+                        rowCount = dataGridView1.RowCount;
                     }
                     else if (MessageBox.Show("Ви впевнені, що хочете вийти?", "Підтвердження", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -570,59 +612,65 @@ namespace TrackEZ
 
         private void doSearch()
         {
-            String selectedColumn = comBoxSh.SelectedItem.ToString();
-            String searchText = txtSh.Text;
-
-            if (!String.IsNullOrEmpty(selectedColumn) && !String.IsNullOrEmpty(searchText))
+            if (!addNewRowGread)
             {
-                DataTable dataTable = new DataTable();
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    dataTable.Columns.Add(column.HeaderText);
-                }
+                String selectedColumn = comBoxSh.SelectedItem.ToString();
+                String searchText = txtSh.Text;
 
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (!String.IsNullOrEmpty(selectedColumn) && !String.IsNullOrEmpty(searchText))
                 {
-                    DataRow dataRow = dataTable.NewRow();
-                    for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                    DataTable dataTable = new DataTable();
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
                     {
-                        dataRow[i] = row.Cells[i].Value;
+                        dataTable.Columns.Add(column.HeaderText);
                     }
-                    dataTable.Rows.Add(dataRow);
-                }
-                string filterExpression = $"[{selectedColumn}] LIKE '%{searchText}%'";
-                dataTable.DefaultView.RowFilter = filterExpression;
-                if (dataTable.DefaultView.Count != 0)
-                {
-                    dataGridView1.DataSource = dataTable;
-                    dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-                    rowCountSearch = dataGridView1.Rows.Count;
-                    if (dataTable.DefaultView.Count != rowCount)
+
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        nowSearch = true;
-                        dataGridView1.AllowUserToAddRows = false;
+                        DataRow dataRow = dataTable.NewRow();
+                        for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                        {
+                            dataRow[i] = row.Cells[i].Value;
+                        }
+                        dataTable.Rows.Add(dataRow);
                     }
-                }
-                else if (rowCountSearch <= rowCount && nowSearch)
-                {
-                    nowSearch = false;
-                    selectTableF();
-                    doSearch();
+                    string filterExpression = $"[{selectedColumn}] LIKE '%{searchText}%'";
+                    dataTable.DefaultView.RowFilter = filterExpression;
+                    if (dataTable.DefaultView.Count != 0)
+                    {
+                        dataGridView1.DataSource = dataTable;
+                        dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                        rowCountSearch = dataGridView1.Rows.Count;
+                        if (dataTable.DefaultView.Count != rowCount)
+                        {
+                            nowSearch = true;
+                            dataGridView1.AllowUserToAddRows = false;
+                        }
+                    }
+                    else if (rowCountSearch <= rowCount && nowSearch)
+                    {
+                        nowSearch = false;
+                        selectTableF();
+                        doSearch();
+                    }
+                    else
+                    {
+                        //txtSh.Text = string.Empty;
+                        MessageBox.Show("Запису не знайдено", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    //txtSh.Text = string.Empty;
-                    MessageBox.Show("Запису не знайдено", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Впишіть дані для пошуку", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
-            {
-                MessageBox.Show("Впишіть дані для пошуку", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                MessageBox.Show("Будь ласка, закінчіть добавлення рядка", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void showInf()
         {
+
             int selectID = 0;
             if (dataGridView1.SelectedCells.Count > 0)
             {
@@ -639,7 +687,6 @@ namespace TrackEZ
             }
             else
                 MessageBox.Show("Будь ласка,виберіть посилку", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
         }
     }
 }
